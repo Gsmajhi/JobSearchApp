@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<th:block th:insert="fragments::css"></th:block>
+</head>
+<body>
+<div th:insert="fragments::navbar"></div>
+<div th:if="${user!=null}">
+<h1>welcome to user profile</h1>
+<a th:href="@{/imageform}">change photo</a></div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<th:block th:insert="fragments::css"></th:block>
+
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+	integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+	<div class="container-fluid p-3 mt-5">
+		<div class="row">
+			<div class="col-md-8 offset-md-2">
+				<div class="card">
+					<div class="card-body">
+						<div class="text-center fs-3">
+							<p>Job Details</p>
+
+						</div>
+						<div class="text-center text-success">
+							<span th:text="${msg}"></span>
+						</div>
+						<table class="table table-striped text-center">
+							<thead>
+								<tr>
+									<th>Id</th>
+									<th>Name</th>
+									<th>Description</th>
+									<th>Location</th>
+									<th>Type</th>
+									<th>Application</th>
+									<th>Action</th>
+								</tr>
+
+							</thead>
+							<tbody>
+								<tr th:each="job:${jobs}">
+									<td th:text="${job.Job_Id}">1</td>
+									<td th:text="${job.Job_Name}">1</td>
+									<td>
+										<!-- Flex container for button and side content -->
+										<div class="d-flex align-items-center gap-2 position-relative">
+											<!-- Button -->
+											<button class="btn btn-primary" type="button"
+												data-bs-toggle="collapse"
+												th:attr="data-bs-target='#desc__' + ${job.Job_Id}">
+												Show</button>
+
+											<!-- Collapse content on the right -->
+											<div class="collapse position-absolute top-0 start-100 ms-2"
+												th:attr="id='desc__' + ${job.Job_Id}" style="z-index: 10;">
+												<div class="card card-body p-2" style="width: 250px;">
+													<span th:text="${job.Job_Desc}">Job Description</span>
+												</div>
+											</div>
+										</div>
+									</td>
+									<td th:text="${job.Job_Loc}">ui</td>
+									<td th:text="${job.Job_Type}">kk</td>
+									<td><a
+										th:href="@{/recruiter/applicatiosbyjobId/{id}(id=${job.Job_Id})}"
+										class="btn btn-warning">Applications</a></td>
+									<td><a th:href="@{/editjobs/{id}(id=${job.Job_Id})}"><i
+											class="fa-solid fa-pen-to-square"></i></a> <a
+										th:href="@{/delete/{id}(id=${job.Job_Id})}"><i
+											class="fa-solid fa-trash"></i></a></td>
+								</tr>
+
+							</tbody>
+
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

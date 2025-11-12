@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<th:block th:insert="fragments::css"></th:block>
+</head>
+<body>
+<div th:insert="fragments::navbar"></div>
+<div class="container mt-5">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="card mt-5">
+					<div class="card-body">
+						
+						<div th:text="${msg}">ghd</div>
+						<div th:if="${user!=null}">
+						<form th:action="@{/uploadImage/{id}(id=${user.id})}"  method="post" enctype="multipart/form-data">
+							
+							<div class="mb-3">
+								<label class="form-label"></label> <input type="file"
+									name="file"  accept="image/*" class="form-control" id="exampleInputEmail1">
+
+							</div>
+							<button type="submit" class="btn btn-primary">Submit</button>
+						</form>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

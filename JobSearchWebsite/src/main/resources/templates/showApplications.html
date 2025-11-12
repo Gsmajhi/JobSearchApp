@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+<th:block th:insert=fragments::css></th:block>
+</head>
+<body>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-6 offset-md-3">
+				<div class="card mt-5">
+					<div class="card-body">
+						<div class="text-center fs-3">
+							<p>Applications</p>
+						</div>
+						
+						<div th:if="${applications!=null}">
+
+							<table class="table " th:each="app:${applications}">
+								<thead>
+									<tr>
+										<th>Application Id</th>
+										<th>Name</th>
+										<th>Resume</th>
+
+
+									</tr>
+
+								</thead>
+								<tbody>
+									<tr>
+										<td th:text="${app.ApplicationId}"></td>
+										<td th:text="${app.name}"></td>
+										<td ><a th:href="@{/recruiter/showResume/{id}(id=${app.ApplicationId})}">resume</a></td>
+
+									</tr>
+								</tbody>
+
+							</table>
+
+						</div>
+
+						<div class="text-center text-danger" th:if="${applications == null}">
+							<span th:text="${msg}">No Applications yet</span>
+						</div>
+
+
+
+
+
+
+					</div>
+
+				</div>
+
+			</div>
+		</div>
+
+	</div>
+</body>
+</html>

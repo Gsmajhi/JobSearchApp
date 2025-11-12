@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymleaf.org">
+<head>
+<meta charset="ISO-8859-1">
+<title>Post a Job</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+	crossorigin="anonymous"></script>
+
+</head>
+<body>
+<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
+  <div class="container-fluid ">
+    <a class="navbar-brand" href="#">Navbar</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="#">Home</a>
+        </li>
+        
+        
+   
+        <li class="nav-item">
+          <a th:href="@{/showjobform}" class="nav-link active" href="#" tabindex="-1">Post Job</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link active" th:href="@{/showJobs}" tabindex="-1">Update Job</a>
+        </li>
+      </ul>
+     <!--  <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-warning me-2" type="submit">Search</button>
+      </form> -->
+     <ul class="navbar-nav  mb-2 mb-lg-0 active">
+     <li class="nav-item dropdown" th:if="${user!=null}">
+           <a class="nav-link dropdown-toggle d-flex align-items-center active" href="#" id="userDropdown"
+                   role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    <!-- <img th:src="${#}"
+                         alt="Profile"
+                         class="rounded-circle me-2"
+                         width="35" height="35"> -->
+                    <span  th:text="${user.Name}">User</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li><a class="dropdown-item" th:href="@{/profile}">My Profile</a></li>
+                    <li>
+                        <form th:action="@{/logout}" method="post">
+                            <button type="submit" class="dropdown-item">Logout</button>
+                        </form>
+                    </li>
+                </ul>
+     </li>
+     
+     </ul>
+     
+      
+     
+    </div>
+  </div>
+</nav>
+<div class="container mt-5">
+<div class="row">
+<div class="col-md-6 offset-md-3">
+<div class="card mt-5">
+<div class="card-body">
+<div class="text-center fs-3">
+<p>Post a Job</p>
+
+</div>
+<div th:text="${msg}">ghd</div>
+<form th:action="@{/postjob}" th:object="${jobs}" method="post">
+<input type="text" class="form-control mb-3" th:field="*{Job_Name}" placeholder="Enter Job Name" />
+
+<select class="form-select mb-3" th:field="*{Job_Type}">
+    <option  value="">-- Select Job Type --</option>
+    <option value="Full Time">Full Time</option>
+    <option value="Part Time">Part Time</option>
+    <option value="Remote">Remote</option>
+    <option value="Hybrid">Hybrid</option>
+    <option value="Internship">Internship</option>
+</select>
+<input type="text" class="form-control mb-3" th:field="*{Job_Loc}" placeholder="Enter Location"/>
+
+<textarea class="form-control mb-3"  th:field="*{Job_Desc}" placeholder="Enter description"></textarea>
+
+<button type="submit" class="btn btn-outline-success ">Submit</button>
+
+
+</form>
+</div>
+</div>
+</div>
+</div>
+</div>
+</body>
+</html>
