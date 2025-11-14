@@ -32,7 +32,7 @@
 									<tr>
 										<td th:text="${app.ApplicationId}"></td>
 										<td th:text="${app.name}"></td>
-										<td ><a th:href="@{/recruiter/showResume/{id}(id=${app.ApplicationId})}">resume</a></td>
+										<td ><a th:href="@{${app.resume}}">resume</a></td>
 
 									</tr>
 								</tbody>

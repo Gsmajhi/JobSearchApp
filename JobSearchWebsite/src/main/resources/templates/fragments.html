@@ -69,10 +69,10 @@
      <li class="nav-item dropdown" th:if="${user!=null}">
            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown"
                    role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    <!-- <img th:src="${#}"
+                    <<img th:src="${imagepath}"
                          alt="Profile"
                          class="rounded-circle me-2"
-                         width="35" height="35"> -->
+                         width="35" height="35"> 
                     <span  th:text="${user.Name}">User</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end">

@@ -65,6 +65,9 @@ public class MainController {
 			if(p!=null) {
 				String email=p.getName();
 				Users user=userRepo.findUserByEmail(email);
+				String imagePath=userImageRepo.findImagePathByUserId(user.getId());
+				System.out.println(user.getId()+imagePath);
+				m.addAttribute("imagepath",imagePath);
 				m.addAttribute("user",user);
 				String role=user.getRole();
 				if(role.equals("ROLE_RECRUITER")) {
@@ -272,7 +275,7 @@ public class MainController {
 			
 			
 			userimage.setUserId(id);
-			userimage.setImagePath("/file/"+file.getOriginalFilename());
+			userimage.setImagePath("/images/"+file.getOriginalFilename());
 			System.out.println(id);
 			System.out.print(file.getOriginalFilename());
 			UserImage ui=userImageRepo.save(userimage);

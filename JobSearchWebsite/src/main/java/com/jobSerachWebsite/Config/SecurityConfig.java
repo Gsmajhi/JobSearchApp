@@ -43,7 +43,7 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf->csrf.disable()).authorizeHttpRequests(auth->auth.requestMatchers("/user/**").hasRole("USER").requestMatchers("/recruiter/**").hasRole("RECRUITER").requestMatchers("/file/**").permitAll().anyRequest().permitAll())
+		http.csrf(csrf->csrf.disable()).authorizeHttpRequests(auth->auth.requestMatchers("/user/**").hasRole("USER").requestMatchers("/recruiter/**").hasRole("RECRUITER").requestMatchers("/file/**","/images/**").permitAll().anyRequest().permitAll())
 		.formLogin(login->login.loginPage("/userlogin").loginProcessingUrl("/login").failureHandler(failureH).successHandler(successH).permitAll())
 		.logout(logout->logout.logoutUrl("/logout").logoutSuccessUrl("/jobs").invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll());
 		return http.build();
