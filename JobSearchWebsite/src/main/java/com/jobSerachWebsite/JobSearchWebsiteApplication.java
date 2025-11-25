@@ -9,7 +9,7 @@ import com.jobSerachWebsite.Entities.Jobs;
 import com.jobSerachWebsite.Entities.Recruiter;
 import com.jobSerachWebsite.Repository.JobRepository;
 import com.jobSerachWebsite.Repository.RecruiterRepo;
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = "com.jobSerachWebsite")
 public class JobSearchWebsiteApplication {
 
 	public static void main(String[] args) {

@@ -18,7 +18,7 @@ public class Users {
 	private boolean enabled;
 	private String varificationCode;
 	private String role;
-	
+	private String provider;
 	
 	public int getId() {
 		return id;
@@ -61,6 +61,12 @@ public class Users {
 	}
 	public void setRole(String role) {
 		this.role = role;
+	}
+	public String getProvider() {
+		return provider;
+	}
+	public void setProvider(String provider) {
+		this.provider = provider;
 	}
 	
 

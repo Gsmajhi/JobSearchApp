@@ -12,13 +12,15 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 import com.jobSerachWebsite.Dao.CustomUserDetailsService;
+import com.jobSerachWebsite.Service.CustomOAuth2UserService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig {
 	@Autowired
 	public CustomSuccessHandler successH;
-	
+	@Autowired
+	public CustomOAuth2UserService customOAuth2UserService;
 	@Autowired
 	public CustomFailureHandler failureH;
 	@Bean
@@ -43,10 +45,37 @@ public class SecurityConfig {
 	
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-		http.csrf(csrf->csrf.disable()).authorizeHttpRequests(auth->auth.requestMatchers("/user/**").hasRole("USER").requestMatchers("/recruiter/**").hasRole("RECRUITER").requestMatchers("/file/**","/images/**").permitAll().anyRequest().permitAll())
-		.formLogin(login->login.loginPage("/userlogin").loginProcessingUrl("/login").failureHandler(failureH).successHandler(successH).permitAll())
-		.logout(logout->logout.logoutUrl("/logout").logoutSuccessUrl("/jobs").invalidateHttpSession(true).deleteCookies("JSESSIONID").permitAll());
+		
+		System.out.println("securityfilterchain");
+		http.csrf(csrf->csrf.disable())
+		.authorizeHttpRequests(auth->auth.requestMatchers("/user/**")
+				.hasRole("USER")
+				.requestMatchers("/recruiter/**")
+				.hasRole("RECRUITER")
+				.requestMatchers("/file/**","/images/**")
+				.permitAll()
+				.anyRequest()
+				.permitAll())
+		.formLogin(login->login
+				.loginPage("/userlogin")
+				.loginProcessingUrl("/login")
+				.failureHandler(failureH)
+				.successHandler(successH)
+				.permitAll())
+		.oauth2Login(oauth -> oauth
+			    .loginPage("/userlogin")
+			    .userInfoEndpoint(info -> info.userService(customOAuth2UserService))
+			
+			.successHandler(successH)  )  // ADD THIS
+
+		.logout(logout->logout.logoutUrl("/logout")
+				.logoutSuccessUrl("/jobs")
+				.invalidateHttpSession(true)
+				.deleteCookies("JSESSIONID")
+				.permitAll());
 		return http.build();
 	}
+	
+	
 
 }
