@@ -19,33 +19,52 @@
 </head>
 <body>
 <div class="container mt-5">
+
 <div class="row">
-<div class="col-md-6 offset-md-3">
-<div class="card">
-<div class="card-body">
-<div class="text-center fs-3">
-<p>User Login</p>
-</div>
-<th:block th:if="${param.error}">
-<div class="text-center text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</div>
-</th:block>
-<form  th:action="@{/login}" method="post">
-	<input type="email" name="username" class="form-control mb-3" placeholder="email"/>
-	<input type="password" name="password" class="form-control mb-3" placeholder="password"/>
-	<button type="submit" class="btn btn-primary">Login</button>
-</form>
-<br>
-<p>OR</p>
-<div>
-<a href="/oauth2/authorization/google">
-    <button type="button" class="btn btn-primary">Login with Google<i class="fa-brands fa-google"></i></button>
-</a>
+    
+    <!-- Image section -->
+    <div class="col-md-4 d-none d-md-block">
+        <img src="Man.jpg" 
+             class="img-fluid rounded float-end"
+             style="max-width: 300px; height: auto;"
+             alt="User Image">
+    </div>
+
+    <!-- Login Form section -->
+    <div class="col-md-6 offset-md-1">
+        <div class="card shadow">
+            <div class="card-body">
+                <div class="text-center fs-3 mb-3">
+                    <p>User Login</p>
+                </div>
+
+                <th:block th:if="${param.error}">
+                    <div class="text-center text-danger">
+                        [[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]
+                    </div>
+                </th:block>
+
+                <form th:action="@{/login}" method="post">
+                    <input type="email" name="username" class="form-control mb-3" placeholder="email"/>
+                    <input type="password" name="password" class="form-control mb-3" placeholder="password"/>
+                    <button type="submit" class="btn btn-primary w-100">Login</button>
+                </form>
+
+                <div class="text-center my-3">OR</div>
+
+                <a href="/oauth2/authorization/google" class="w-100">
+                    <button type="button" class="btn btn-danger w-100">
+                        <i class="fa-brands fa-google me-2"></i>Login with Google
+                    </button>
+                </a>
+
+            </div>
+        </div>
+    </div>
+
 </div>
 
 </div>
-</div>
-</div>
-</div>
-</div>
 </body>
+
 </html>

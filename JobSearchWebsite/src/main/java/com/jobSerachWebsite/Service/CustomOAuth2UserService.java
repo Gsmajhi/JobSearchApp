@@ -19,10 +19,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	UserRepository userRepo;
 	
 
-	public CustomOAuth2UserService() {
-		System.out.println("reached here");
-	}
-
+	
 
 	
 	
@@ -30,7 +27,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 	public OAuth2User loadUser(OAuth2UserRequest userRequest) throws OAuth2AuthenticationException {
 		
 		OAuth2User oauthUser= super.loadUser(userRequest);
-		System.out.println("Attributes: " + oauthUser.getAttributes());
+		
 
 		String email=oauthUser.getAttribute("email");
 		String name=oauthUser.getAttribute("name");
@@ -39,7 +36,7 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
 		}
 		
 		Users user=userRepo.findUserByEmail(email);
-		System.out.println(email+" "+name);
+		
 		if(user==null) {
 			user=new Users();
 			user.setEmail(email);
