@@ -1,20 +1,23 @@
-# ---------- Stage 1: Build ----------
+# Build stage
 FROM maven:3.8.5-eclipse-temurin-17 AS build
+
 WORKDIR /app
 
-# Copy project files
-COPY JoSearchWebsite/pom.xml ./pom.xml
-COPY JoSearchWebsite/src ./src
+# Copy project inside the Docker image
+COPY JobSearchWebsite/pom.xml ./pom.xml
+COPY JobSearchWebsite/src ./src
 
-# Build the project
-RUN mvn -q -DskipTests clean package
+# Build the Spring Boot JAR
+RUN mvn -q -DskipTests package
 
-
-# ---------- Stage 2: Run ----------
+# Runtime stage
 FROM eclipse-temurin:17-jdk
+
 WORKDIR /app
 
+# Copy jar from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
 EXPOSE 8080
-CMD ["java", "-jar", "app.jar"]
+
+ENTRYPOINT ["java", "-jar", "app.jar"]
