@@ -3,20 +3,20 @@ FROM maven:3.8.5-eclipse-temurin-17 AS build
 
 WORKDIR /app
 
-# Copy project inside the Docker image
-COPY JobSearchWebsite/pom.xml ./pom.xml
+COPY JobSearchWebsite/pom.xml .
+RUN mvn dependency:go-offline -B
+
 COPY JobSearchWebsite/src ./src
 
-# Build the Spring Boot JAR
-RUN mvn -q -DskipTests package
+RUN mvn -q -DskipTests package && \
+    mv target/*.jar app.jar
 
 # Runtime stage
 FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-# Copy jar from the build stage
-COPY --from=build /app/target/*.jar app.jar
+COPY --from=build /app/app.jar app.jar
 
 EXPOSE 8080
 
