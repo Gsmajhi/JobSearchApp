@@ -3,8 +3,8 @@ FROM maven:3.8.5-eclipse-temurin-17 AS build
 WORKDIR /app
 
 # Copy project files
-COPY JoSerachApp/pom.xml ./pom.xml
-COPY JoSerachApp/src ./src
+COPY JoSearchApp/pom.xml ./pom.xml
+COPY JoSearchApp/src ./src
 
 # Build the project
 RUN mvn -q -DskipTests clean package
