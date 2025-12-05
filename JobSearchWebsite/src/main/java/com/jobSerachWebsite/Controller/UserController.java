@@ -72,7 +72,7 @@ public class UserController {
 
 	}
 
-	private static final String UPLOAD_DIR = "tmp/pdfs/";
+	private static final String UPLOAD_DIR = "/tmp/pdfs/";
 
 	@RequestMapping(path = "/submitApplication", method = RequestMethod.POST)
 	public String submitApplication(@RequestParam("resume") MultipartFile file, @RequestParam("name") String name,
@@ -82,6 +82,7 @@ public class UserController {
 		Jobs job = jobRepo.findById(jobid).orElse(null);
 
 		if (!file.isEmpty()) {
+			Files.createDirectories(Paths.get(UPLOAD_DIR));
 			Path path = Paths.get(UPLOAD_DIR + file.getOriginalFilename());
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			application.setJob(job);
@@ -104,6 +105,7 @@ public class UserController {
 
 	}
 }
+
 
 
 
