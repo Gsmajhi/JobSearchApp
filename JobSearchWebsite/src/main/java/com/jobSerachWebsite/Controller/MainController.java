@@ -58,7 +58,7 @@ public class MainController {
 
 	private static final String IMAGE_PATH = "C:/Users/Ghanashyam Majhi/Userimages/";
 
-	@RequestMapping(path = "/jobs")
+	@RequestMapping(path = "/")
 	public String home(Principal p, Model m) {
 		if (p != null) {
 			String email = p.getName();
@@ -324,3 +324,4 @@ public class MainController {
 	}
 
 }
+
