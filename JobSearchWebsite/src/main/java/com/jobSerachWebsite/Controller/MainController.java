@@ -56,7 +56,7 @@ public class MainController {
 	@Autowired
 	UserImageRepository userImageRepo;
 
-	private static final String IMAGE_PATH = "tmp/images/";
+	private static final String IMAGE_PATH = "/tmp/images/";
 
 	@RequestMapping({"/","/jobs"})
 	public String home(Principal p, Model m) {
@@ -303,6 +303,8 @@ public class MainController {
 	public String uploadImage(@RequestParam MultipartFile file, @PathVariable int id, Model m) throws IOException {
 		UserImage userimage = new UserImage();
 		if (file != null) {
+			Files.createDirectories(Paths.get(IMAGE_PATH));
+
 			Path path = Paths.get(IMAGE_PATH + file.getOriginalFilename());
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 
@@ -324,6 +326,7 @@ public class MainController {
 	}
 
 }
+
 
 
 
