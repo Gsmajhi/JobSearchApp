@@ -85,7 +85,7 @@ public class UserController {
 			Path path = Paths.get(UPLOAD_DIR + file.getOriginalFilename());
 			Files.copy(file.getInputStream(), path, StandardCopyOption.REPLACE_EXISTING);
 			application.setJob(job);
-			application.setResume("/files/" + file.getOriginalFilename());
+			application.setResume("/pdfs/" + file.getOriginalFilename());
 			application.setUserId(userid);
 			application.setName(name);
 			Application ap = appRepo.save(application);
@@ -104,5 +104,6 @@ public class UserController {
 
 	}
 }
+
 
 
