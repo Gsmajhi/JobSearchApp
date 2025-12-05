@@ -72,7 +72,7 @@ public class UserController {
 
 	}
 
-	private static final String UPLOAD_DIR = "C:/Users/Ghanashyam Majhi/Uploads/";
+	private static final String UPLOAD_DIR = "tmp/pdf/";
 
 	@RequestMapping(path = "/submitApplication", method = RequestMethod.POST)
 	public String submitApplication(@RequestParam("resume") MultipartFile file, @RequestParam("name") String name,
@@ -104,3 +104,4 @@ public class UserController {
 
 	}
 }
+
