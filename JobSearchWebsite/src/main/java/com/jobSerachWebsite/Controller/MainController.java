@@ -56,7 +56,7 @@ public class MainController {
 	@Autowired
 	UserImageRepository userImageRepo;
 
-	private static final String IMAGE_PATH = "C:/Users/Ghanashyam Majhi/Userimages/";
+	private static final String IMAGE_PATH = "tmp/images/";
 
 	@RequestMapping({"/","/jobs"})
 	public String home(Principal p, Model m) {
@@ -324,6 +324,7 @@ public class MainController {
 	}
 
 }
+
 
 
 
