@@ -32,7 +32,7 @@ public class EmailServiceImpl implements EmailService{
 		try {
 			MimeMessage message=mailSender.createMimeMessage();
 			MimeMessageHelper helper=new MimeMessageHelper(message);
-			helper.setFrom(from);
+			//helper.setFrom(from);
 			helper.setTo(to);
 			helper.setSubject(subject);
 			content=content.replace("[[name]]",user.getName());
@@ -48,3 +48,4 @@ public class EmailServiceImpl implements EmailService{
 	
 
 }
+
