@@ -115,21 +115,39 @@ public class MainController {
 		return "postjob";
 	}
 
+	// @RequestMapping(path = "/postjob", method = RequestMethod.POST)
+	// public String postJob(@ModelAttribute Jobs jobs, Principal p, RedirectAttributes redirectAttrs) {
+	// 	String email = p.getName();
+	// 	Users user = userRepo.findUserByEmail(email);
+	// 	Optional<Recruiter> recrOpt = recruiterRepo.findById(user.getId());
+	// 	Recruiter recruiter = recrOpt.get();
+	// 	jobs.setRecruiter(recruiter);
+	// 	Jobs jobss = jobRepo.save(jobs);
+	// 	if (jobss != null) {
+	// 		redirectAttrs.addFlashAttribute("msg", "Job Posted");
+
+	// 	}
+
+	// 	return "redirect:/showjobform";
+	// }
 	@RequestMapping(path = "/postjob", method = RequestMethod.POST)
-	public String postJob(@ModelAttribute Jobs jobs, Principal p, RedirectAttributes redirectAttrs) {
-		String email = p.getName();
-		Users user = userRepo.findUserByEmail(email);
-		Optional<Recruiter> recrOpt = recruiterRepo.findById(user.getId());
-		Recruiter recruiter = recrOpt.get();
-		jobs.setRecruiter(recruiter);
-		Jobs jobss = jobRepo.save(jobs);
-		if (jobss != null) {
-			redirectAttrs.addFlashAttribute("msg", "Job Posted");
+public String postJob(@ModelAttribute Jobs jobs,
+                      Principal p,
+                      RedirectAttributes redirectAttrs) {
 
-		}
+    String email = p.getName();
+    Users user = userRepo.findUserByEmail(email);
 
-		return "redirect:/showjobform";
-	}
+    Recruiter recruiter = recruiterRepo.findByUser(user)
+            .orElseThrow(() -> new RuntimeException("Recruiter not found for user: " + email));
+
+    jobs.setRecruiter(recruiter);
+    jobRepo.save(jobs);
+
+    redirectAttrs.addFlashAttribute("msg", "Job Posted");
+    return "redirect:/showjobform";
+}
+
 
 	@RequestMapping(path = "/userRegform")
 	public String showUserRegForm(Model m) {
@@ -326,6 +344,7 @@ public class MainController {
 	}
 
 }
+
 
 
 
